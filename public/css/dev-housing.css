@@ -1,0 +1,48 @@
+/* tombol utama */
+.btn-primary{
+    background:#5B7042;color:#fff;border:none;border-radius:10px;
+    padding:10px 14px;font-weight:800;text-decoration:none;display:inline-block
+  }
+  .btn-primary:hover{background:#3e4d2d}
+  
+  /* tombol datar */
+  .btn-plain{
+    background:#eef1e6;border:1px solid #e2e6d6;border-radius:10px;
+    padding:10px 14px;font-weight:700;cursor:pointer
+  }
+  .btn-plain:hover{filter:brightness(.98)}
+  .btn-link{font-weight:800;color:#5B7042;text-decoration:none}
+  .btn-link:hover{text-decoration:underline}
+  
+  /* kartu umum */
+  .card{background:#fff;border:1px solid #eee;border-radius:16px;padding:16px;margin-bottom:16px}
+  
+  /* filters */
+  .filters-grid{display:grid;grid-template-columns:1fr 220px 220px auto;gap:10px}
+  .input{border:1px solid #e6e6e6;border-radius:10px;padding:10px 12px;background:#fafafa}
+  
+  /* grid kartu perumahan */
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:12px}
+  .house-card{background:#fff;border:1px solid #eee;border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .thumb{background:#ddd center/cover no-repeat;height:160px}
+  .house-body{padding:14px}
+  .house-title{margin:0 0 6px 0;font-size:18px;font-weight:800}
+  .meta{margin-top:6px;color:#666;font-weight:600}
+  .meta .dot{margin:0 6px;color:#bbb}
+  .muted{color:#8a8a8a}
+  .foot{margin-top:12px;display:flex;align-items:center;justify-content:space-between}
+  
+  /* badges status */
+  .badge{display:inline-block;padding:6px 12px;border-radius:8px;font-weight:800;font-size:12px;color:#fff}
+  .badge-warn{background:#E4B33C}
+  .badge-ok{background:#56A45A}
+  .badge-bad{background:#E1533E}
+  
+  /* empty state */
+  .empty{text-align:center}
+  .empty img{width:140px;opacity:.9;margin:10px auto 6px;display:block}
+  
+  /* responsive */
+  @media(max-width:900px){
+    .filters-grid{grid-template-columns:1fr 1fr;gap:10px}
+  }

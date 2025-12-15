@@ -1,0 +1,126 @@
+/* ============================================
+ *  Komponen khusus halaman DINAS (verifikasi, nota, dll)
+ * ============================================ */
+
+/* Tabs status (Pending / Disetujui / Perlu Revisi) */
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: 0.18s ease;
+}
+
+.tab:hover {
+  background: #f3f4f6;
+}
+
+.tab.active {
+  background: #e8f5e9;    /* hijau lembut */
+  border-color: #86efac;
+  color: #14532d;
+}
+
+/* =========================
+ *  BADGE STATUS UMUM
+ * ========================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Pending */
+.badge-warn {
+  background: #fef9c3; /* kuning sangat lembut */
+  color: #854d0e;
+}
+
+/* Disetujui */
+.badge-ok {
+  background: #ecfdf3; /* hijau lembut */
+  color: #166534;
+}
+
+/* Perlu revisi / Ditolak (merah) */
+.badge-danger,
+.badge-bad {
+  background: #fee2e2; /* merah lembut */
+  color: #b91c1c;
+}
+
+/* Status lain / tidak diketahui */
+.badge-muted {
+  background: #e5e7eb; /* abu lembut */
+  color: #4b5563;
+}
+
+/* =========================
+ *  CARD SPACING
+ * ========================= */
+.card + .card {
+  margin-top: 14px;
+}
+
+/* =========================
+ *  PAGINATION LARAVEL
+ * ========================= */
+.pagination {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page-item .page-link {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  background: #e8f5e9;
+  border-color: #86efac;
+  color: #14532d;
+}
+
+.page-item.disabled .page-link {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* =========================
+ *  RESPONSIVE: kolom cover
+ * ========================= */
+@media (max-width: 640px) {
+  .table th:nth-child(1),
+  .table td:nth-child(1) {
+    width: 56px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .tab {
+    padding: 8px 12px;
+  }
+}

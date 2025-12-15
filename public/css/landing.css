@@ -1,0 +1,50 @@
+/* Font & reset ringan */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+/* HERO */
+.hero{min-height:420px}
+.hero__bg{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; z-index:0;
+}
+.hero__overlay{
+  position:absolute; inset:0; z-index:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.45));
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.8rem 1.25rem; border-radius:.5rem; font-weight:700;
+  transition: all .2s ease-in-out; border:1px solid transparent;
+}
+.btn--primary{ background:#E53935; color:#fff }
+.btn--primary:hover{ filter:brightness(.95) }
+
+.btn--light{ background:#fff; color:#111 }
+.btn--light:hover{ background:#f4f4f5 }
+
+.btn--soft{ background:#EDEDED; color:#111 }
+.btn--soft:hover{ background:#e5e7eb }
+
+.btn--white{ background:#fff; color:#111 }
+.btn--white:hover{ background:#f4f4f5 }
+
+/* Cards */
+.card{
+  background:#fff; border:1px solid #eee; border-radius:1rem;
+  padding:1.25rem; text-align:center;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+.card__title{ margin-top:1rem; font-weight:800; font-size:1.05rem; letter-spacing:.2px }
+.card__desc{ color:#6b7280; font-size:.95rem; line-height:1.5; margin: .5rem 0 1rem }
+
+/* Footer */
+.footer__link{ color:#fff; opacity:.95 }
+.footer__link:hover{ text-decoration:underline; opacity:1 }
+
+/* Responsiveness */
+@media (min-width:640px){
+  .hero{min-height:520px}
+}

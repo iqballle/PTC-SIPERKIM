@@ -1,0 +1,415 @@
+/* ===== Global (shared Developer + Dinas) ===== */
+:root{
+  --olive:#5B7042;
+  --olive-dark:#3e4d2d;
+  --bg:#f5f5f5;
+  --muted:#8a8a8a;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#333;
+  font-family:'Inter',sans-serif;
+}
+#wrapper{
+  display:flex;
+  width:100%;
+  min-height:100vh;
+  transition:.3s;
+}
+
+/* ===== Sidebar (sama persis seperti dev-dashboard.css) ===== */
+.sidebar{
+  width:260px;
+  height:100vh;
+  position:fixed;
+  left:0;
+  top:0;
+  overflow-y:auto;
+  background:var(--olive);
+  color:#fff;
+  transition:transform .3s ease-in-out;
+}
+.sidebar-header{
+  text-align:center;
+  padding:26px 12px;
+  border-bottom:1px solid rgba(255,255,255,.2);
+}
+.sidebar-logo{
+  width:56px;
+  height:56px;
+  border-radius:9999px;   /* bulat */
+  object-fit:cover;
+  display:block;
+  margin:0 auto 12px;     /* tengah + jarak ke teks */
+}
+.sidebar-title{
+  font-weight:800;
+  margin-top:8px;
+  line-height:1.2;
+}
+.sidebar-title small{
+  font-weight:600;
+  opacity:.9;
+}
+.sidebar-menu{
+  list-style:none;
+  margin:18px 0 0;
+  padding:0;
+}
+.sidebar-menu li{margin:6px 0}
+.sidebar-menu li a{
+  display:block;
+  margin:0 10px;
+  padding:14px 20px;
+  border-radius:12px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:.2px;
+  transition:.2s;
+}
+.sidebar-menu li a:hover,
+.sidebar-menu li.active a{
+  background:var(--olive-dark);
+}
+
+/* ===== Content ===== */
+.content{
+  flex-grow:1;
+  margin-left:260px;
+  padding:26px 30px;
+  transition:margin-left .3s;
+}
+
+/* ===== Toggle (hamburger) ===== */
+.sidebar-toggle{
+  position:fixed;
+  top:18px;
+  left:18px;
+  z-index:1000;
+  background:#ffffff;
+  border:1px solid rgba(15,23,42,0.12);
+  border-radius:9999px;      /* bulat */
+  cursor:pointer;
+  color:var(--olive-dark);
+  font-size:22px;
+  padding:8px 10px;
+  box-shadow:0 2px 6px rgba(15,23,42,0.18);
+  line-height:1;
+}
+.sidebar-toggle:hover{
+  transform:scale(1.06);
+}
+
+/* ===== Topbar ===== */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:4px;
+  margin-bottom:18px;
+}
+.topbar h1{
+  margin:0;
+  font-size:28px;
+  font-weight:800;
+}
+.topbar-right{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.search input{
+  width:260px;
+  max-width:48vw;
+  background:#eef1e6;
+  border:1px solid #e6ead7;
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:14px;
+  outline:none;
+}
+.user-pod{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:8px 10px;
+}
+.user-pod img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+}
+.user-name{font-weight:700}
+.user-role{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:-2px;
+}
+
+/* ===== KPI Cards ===== */
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(180px, 1fr));
+  gap:16px;
+  margin:14px 0 22px;
+}
+.kpi{
+  position:relative;
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:12px;
+  padding:16px 18px;
+  min-height:88px;
+}
+.kpi-title{font-weight:800}
+.kpi-sub{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+}
+.kpi-num{
+  position:absolute;
+  right:16px;
+  top:16px;
+  font-size:28px;
+  font-weight:800;
+  color:#444;
+}
+
+/* ===== Card + Table ===== */
+.card{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:16px;
+  padding:18px;
+}
+.card h2{
+  margin:0 0 14px 0;
+  font-size:22px;
+}
+
+.table-wrap{
+  width:100%;
+  overflow:auto;
+}
+.table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  border-radius:12px;
+  overflow:hidden;
+}
+.table thead th{
+  text-align:left;
+  background:#fafafa;
+  border-bottom:1px solid #eee;
+  padding:12px 14px;
+  font-weight:800;
+}
+.table tbody td{
+  padding:14px;
+  border-bottom:1px solid #f0f0f0;
+  vertical-align:middle;
+}
+
+/* Badges umum */
+.badge{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:8px;
+  font-weight:800;
+  font-size:13px;
+  color:#fff;
+}
+.badge-warn{background:#E4B33C}  /* kuning */
+.badge-ok{background:#56A45A}    /* hijau */
+.badge-bad{background:#E1533E}   /* merah */
+
+/* ===== Closed mode (class ditambah di <body> oleh dashboard.js) ===== */
+.sidebar-closed .sidebar{
+  transform:translateX(-100%);
+}
+.sidebar-closed .content{
+  margin-left:0;
+}
+/* geser judul sedikit agar tidak ketimpa tombol ☰ */
+.sidebar-closed .topbar{
+  padding-left:48px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px){
+  .kpis{grid-template-columns:1fr 1fr}
+  .search input{width:180px}
+}
+@media (max-width: 768px){
+  .sidebar{
+    transform:translateX(-100%);
+    z-index:999;
+  }
+  .content{
+    margin-left:0;
+    padding-top:72px;      /* biar judul tidak ketimpa tombol di HP */
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .sidebar-toggle{
+    top:15px;
+    left:15px;
+  }
+}
+
+/* ============================================================
+ *  KHUSUS HALAMAN DINAS (detail nota, verifikasi, dll)
+ *  (TIDAK override .badge/.card/.table di atas)
+ * ============================================================ */
+
+/* Layout dua kolom detail (identitas + dokumen) */
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 960px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Judul kecil di dalam card */
+.detail-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+/* Tabel info identitas */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.info-table th,
+.info-table td {
+  padding: 6px 0;
+  vertical-align: top;
+}
+
+.info-table th {
+  width: 34%;
+  font-weight: 600;
+  color: #6b7280;
+  padding-right: 16px;
+}
+
+.info-table td {
+  color: #111827;
+}
+
+/* Tabel dokumen */
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 4px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.doc-table thead tr {
+  background: #f9fafb;
+}
+
+.doc-table th,
+.doc-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.doc-table th {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.doc-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Link dokumen */
+.doc-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: #2563eb;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eff6ff;
+}
+
+.doc-link::before {
+  content: "↗";
+  font-size: 11px;
+}
+
+.doc-link:hover {
+  background: #dbeafe;
+}
+
+/* Status "Belum diunggah" */
+.doc-missing {
+  font-size: 12px;
+  color: #9ca3af;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f3f4f6;
+}
+
+/* Badge status khusus Dinas (pending/disetujui/revisi di header detail) */
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-pending {
+  background: #fef9c3;
+  color: #854d0e;
+}
+.badge-revisi {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+.badge-ok-detail {
+  background: #ecfdf3;
+  color: #15803d;
+}
+
+.btn-plain{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:600;
+  text-decoration:none;
+  border:1px solid #d1d5db;
+  background:#ffffff;
+  color:#1d4ed8;
+  transition:background .15s, color .15s, border-color .15s;
+}
