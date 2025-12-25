@@ -82,19 +82,10 @@
           </a>
         </li>
 
-        {{-- Verifikasi Penyerahan PSU (placeholder) --}}
-        <li class="{{ request()->routeIs('dinas.permohonan.psu.*') ? 'active' : '' }}">
-          @if(Route::has('dinas.permohonan.psu.index'))
-            <a href="{{ route('dinas.permohonan.psu.index') }}">Verifikasi Penyerahan PSU</a>
-          @else
-            <a href="#">
-              Verifikasi Penyerahan PSU
-              <small style="font-size:10px;opacity:.7;">(segera)</small>
-            </a>
-          @endif
-        </li>
 
-        <li><a href="#">RTH - Penyiraman Otomatis</a></li>
+        <li class="{{ request()->routeIs('dinas.rth.*') ? 'active' : '' }}">
+          <a href="{{ route('dinas.rth.index') }}">RTH - Penyiraman Otomatis</a>
+        </li>
 
         <li class="{{ request()->routeIs('dinas.settings.*') ? 'active' : '' }}">
           <a href="{{ route('dinas.settings.index') }}">Pengaturan</a>

@@ -1,3 +1,4 @@
+{{-- resources/views/developer/permohonan/index.blade.php --}}
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -74,11 +75,20 @@
       background:#fef3c7;
       border-color:#fbbf24;
     }
+
+    /* tambahan biar kartu atas rapi (optional, tapi membantu) */
+    .grid-cards{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap:14px;
+      align-items: stretch;
+    }
   </style>
 </head>
-<body class="font-[Inter] antialiased text-[#2f2f2f]">
 
+<body class="font-[Inter] antialiased text-[#2f2f2f]">
 <div id="wrapper" class="flex">
+
   {{-- SIDEBAR --}}
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-header">
@@ -88,45 +98,38 @@
         <small>Developer</small>
       </h3>
     </div>
-  
+
     <ul class="sidebar-menu">
-      {{-- Dashboard --}}
       <li class="{{ request()->routeIs('developer.dashboard') ? 'active' : '' }}">
         <a href="{{ route('developer.dashboard') }}">Dashboard</a>
       </li>
-  
-      {{-- Data Perumahan --}}
+
       <li class="{{ request()->routeIs('developer.perumahan.*') ? 'active' : '' }}">
         <a href="{{ route('developer.perumahan.index') }}">Data Perumahan saya</a>
       </li>
-  
-      {{-- Permohonan ke Dinas --}}
+
       <li class="{{ request()->routeIs('developer.permohonan.*') ? 'active' : '' }}">
         <a href="{{ route('developer.permohonan.index') }}">Permohonan Ke Dinas</a>
       </li>
-  
-      {{-- Notifikasi & Revisi --}}
+
       <li class="{{ request()->routeIs('developer.notifikasi.*') ? 'active' : '' }}">
         <a href="{{ route('developer.notifikasi.index') }}">
           Notifikasi & Revisi
-  
-          {{-- 🔴 TITIK MERAH / BADGE --}}
           @if(!empty($devRevisiCount) && $devRevisiCount > 0)
             <span class="notif-dot">{{ $devRevisiCount }}</span>
           @endif
         </a>
       </li>
-  
+
       <li class="{{ request()->routeIs('developer.rth.*') ? 'active' : '' }}">
         <a href="{{ route('developer.rth.index') }}">RTH - Penyiraman Otomatis</a>
       </li>
-      
+
       <li class="{{ request()->routeIs('developer.settings.*') ? 'active' : '' }}">
         <a href="{{ route('developer.settings.index') }}">Pengaturan</a>
       </li>
     </ul>
   </aside>
-  
 
   {{-- KONTEN --}}
   <main id="content" class="content">
@@ -150,7 +153,7 @@
     {{-- KARTU JENIS PERMOHONAN --}}
     <section class="grid-cards" style="margin-top:18px;">
       {{-- Kartu 1: Nota Dinas --}}
-      <article class="house-card" style="max-width:480px;">
+      <article class="house-card">
         <div class="house-body">
           <h3 class="house-title">Permohonan Nota Dinas Pembangunan Perumahan</h3>
           <p class="muted" style="margin-top:4px;">
@@ -164,19 +167,23 @@
         </div>
       </article>
 
-      {{-- Kartu 2: Penyerahan PSU (placeholder) --}}
-      <article class="house-card" style="max-width:480px;opacity:0.6;">
+      {{-- Kartu 2: Penyerahan PSU (opsional / placeholder) --}}
+      {{-- 
+      <article class="house-card">
         <div class="house-body">
-          <h3 class="house-title">Permohonan Penyerahan PSU Perumahan</h3>
+          <h3 class="house-title">Permohonan Penyerahan PSU</h3>
           <p class="muted" style="margin-top:4px;">
-            Pengajuan serah terima prasarana, sarana, dan utilitas (PSU) perumahan kepada pemerintah.
+            Pengajuan penyerahan PSU (Prasarana, Sarana, dan Utilitas) perumahan.
           </p>
           <div class="foot" style="margin-top:10px;justify-content:flex-end;">
-            <button class="btn-plain" type="button" disabled>Segera Hadir</button>
+            <a href="#" class="btn-primary">Ajukan PSU</a>
           </div>
         </div>
       </article>
+      --}}
     </section>
+    {{-- ✅ PENTING: section grid-cards ditutup DI SINI,
+         sehingga riwayat pasti turun ke bawah --}}
 
     {{-- RIWAYAT PERMOHONAN NOTA DINAS --}}
     <section class="card" style="margin-top:24px;padding:18px 20px;">
@@ -192,7 +199,7 @@
           <table class="permohonan-table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Nama Perumahan</th>
                 <th>Tanggal Diajukan</th>
                 <th>Status</th>
@@ -200,6 +207,7 @@
                 <th>Aksi</th>
               </tr>
             </thead>
+
             <tbody>
               @foreach($notaDinasList as $idx => $permohonan)
                 @php
@@ -218,24 +226,29 @@
                       $class = 'status-ditolak';
                   }
                 @endphp
+
                 <tr>
                   <td>{{ $idx + 1 }}</td>
+
                   <td>
                     {{ $permohonan->nama_perumahan }}
                     <div style="font-size:11px;color:#6b7280;">
                       {{ $permohonan->nama_pengembang }}
                     </div>
                   </td>
+
                   <td>{{ $permohonan->created_at->format('d M Y H:i') }}</td>
+
                   <td>
                     <span class="status-pill {{ $class }}">{{ $label }}</span>
                   </td>
+
                   <td style="font-size:12px;color:#6b7280;">
                     {{ $permohonan->catatan_dinas ?? '-' }}
                   </td>
+
                   <td>
                     <div class="aksi-buttons">
-                      {{-- DETAIL --}}
                       <a
                         href="{{ route('developer.permohonan.nota.show', $permohonan->id) }}"
                         class="aksi-link"
@@ -243,7 +256,6 @@
                         Detail
                       </a>
 
-                      {{-- EDIT / PERBAIKI hanya jika status revisi --}}
                       @if($status === 'revisi')
                         <a
                           href="{{ route('developer.permohonan.nota.edit', $permohonan->id) }}"
@@ -266,8 +278,8 @@
         </p>
       @endif
     </section>
+
   </main>
 </div>
-
 </body>
 </html>

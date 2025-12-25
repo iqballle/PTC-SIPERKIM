@@ -188,6 +188,37 @@
                     </div>
                 @endif
 
+                {{-- FASILITAS --}}
+                @php
+                $fasRaw = $perumahan->fasilitas ?? null;
+                $fasList = [];
+
+                if ($fasRaw) {
+                    // pisah berdasarkan enter / koma
+                    $parts = preg_split('/\r\n|\r|\n|,/', $fasRaw);
+                    $fasList = array_values(array_filter(array_map('trim', $parts)));
+                }
+                @endphp
+
+                @if(!empty($fasList))
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="border-b border-gray-200 px-4 py-2.5 text-sm font-semibold">
+                        Fasilitas
+                    </div>
+
+                    <div class="p-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+                            @foreach($fasList as $item)
+                                <div class="flex items-start gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2">
+                                    <span class="mt-0.5 text-[#9C2F21] font-bold">•</span>
+                                    <span class="text-gray-800">{{ $item }}</span>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                @endif
+
                 {{-- TABEL ANGSURAN (GAMBAR) --}}
                 @if(!empty($perumahan->tabel_angsuran_url ?? null))
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4">

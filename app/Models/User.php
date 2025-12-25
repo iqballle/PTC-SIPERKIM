@@ -18,9 +18,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',        // developer / dinas / dll
-        'phone',       // nomor telepon
-        'photo_path',  // path foto di storage
+        'role',              // developer / dinas / dll
+        'phone',             // nomor telepon
+        'photo_path',
+
+        // ✅ RTH
+        'rth_device_id',
+        'rth_perumahan_id',  // ✅ tambah: perumahan yang dipilih untuk RTH
     ];
 
     /**
@@ -39,9 +43,23 @@ class User extends Authenticatable
         'password'          => 'hashed',
     ];
 
+    // =========================================================
+    // ✅ RELATIONSHIPS
+    // =========================================================
+
     /**
-     * Helper role (opsional, kalau mau dipakai nanti).
+     * ✅ Perumahan yang dipilih untuk fitur RTH (1 user -> 1 perumahan terpilih)
+     * Pastikan kolom users.rth_perumahan_id ada, dan mengarah ke perumahans.id
      */
+    public function perumahanRth()
+    {
+        return $this->belongsTo(\App\Models\Perumahan::class, 'rth_perumahan_id');
+    }
+
+    // =========================================================
+    // ✅ HELPERS
+    // =========================================================
+
     public function isDeveloper(): bool
     {
         return $this->role === 'developer';
@@ -54,16 +72,13 @@ class User extends Authenticatable
 
     /**
      * Accessor: $user->photo_url
-     * Menghasilkan URL foto (atau default avatar kalau belum ada).
      */
     public function getPhotoUrlAttribute(): string
     {
         if ($this->photo_path) {
-            // Asumsi: sudah menjalankan `php artisan storage:link`
             return asset('storage/' . $this->photo_path);
         }
 
-        // fallback ke gambar default
         return asset('images/default-avatar.png');
     }
 }

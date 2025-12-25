@@ -13,9 +13,7 @@ class DeveloperPerumahanController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Ambil nama perusahaan terakhir milik developer (dari tabel perumahan)
-     */
+
     private function getLastCompanyName(int $userId): ?string
     {
         return Perumahan::where('user_id', $userId)
@@ -67,7 +65,6 @@ class DeveloperPerumahanController extends Controller
     {
         $userId = auth()->id();
 
-        // ✅ ambil nama perusahaan terakhir untuk auto-fill
         $lastCompanyName = $this->getLastCompanyName($userId);
 
         return view('developer.perumahan.create', compact('lastCompanyName'));
@@ -117,7 +114,7 @@ class DeveloperPerumahanController extends Controller
             'dokumen_foto.*' => ['nullable','image','mimes:jpg,jpeg,png,webp','max:5120'],
         ]);
 
-        // ✅ kalau nama_perusahaan kosong, auto isi dari perumahan terakhir
+        
         if (empty($data['nama_perusahaan'])) {
             $data['nama_perusahaan'] = $this->getLastCompanyName($userId);
         }

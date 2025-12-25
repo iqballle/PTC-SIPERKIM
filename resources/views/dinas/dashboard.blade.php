@@ -118,7 +118,7 @@
                 </td>
                 <td>{{ $p->created_at?->format('d M Y H:i') }}</td>
                 <td>
-                  <a href="{{ route('dinas.permohonan.nota.show', $p->id) }}" class="btn-plain" style="font-size:12px;">
+                  <a href="{{ route('dinas.permohonan.nota.show', $p->id) }}" class="btn-plain" >
                     Detail
                   </a>
                 </td>
@@ -129,5 +129,82 @@
       </div>
     @endif
   </section>
+
+  {{-- TABEL PERUMAHAN SUDAH DISETUJUI TERBARU --}}
+<section class="card" style="margin-top:20px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <h2>Perumahan Terverifikasi Terbaru</h2>
+    <a href="{{ route('dinas.perumahan.verify.index') }}" class="btn-plain" style="font-size:12px;">
+      Lihat semua →
+    </a>
+  </div>
+
+  @if(($recentPerumahanApproved ?? collect())->isEmpty())
+    <p style="font-size:13px;color:#6b7280;">Belum ada perumahan yang disetujui.</p>
+  @else
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Perumahan</th>
+            <th>Developer</th>
+            <th>Lokasi</th>
+            <th>Status</th>
+            <th>Disetujui</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @foreach($recentPerumahanApproved as $i => $r)
+            @php
+              // ambil status dari kolom status / status_verifikasi (karena kamu punya 2)
+              $raw = strtolower((string)($r->status ?? $r->status_verifikasi ?? 'pending'));
+
+              $badgeClass = 'badge-warn';
+              $label = 'Pending';
+
+              if (in_array($raw, ['disetujui','approved','approve','setuju'])) {
+                $badgeClass = 'badge-ok';
+                $label = 'Disetujui';
+              } elseif (in_array($raw, ['ditolak','rejected','reject','tolak'])) {
+                $badgeClass = 'badge-bad';
+                $label = 'Ditolak';
+              } elseif (in_array($raw, ['revisi','revision','needs_revision'])) {
+                $badgeClass = 'badge-warn';
+                $label = 'Perlu Revisi';
+              }
+            @endphp
+
+            <tr>
+              <td>{{ $i + 1 }}</td>
+              <td style="font-weight:700;color:#0f172a;">
+                {{ $r->nama }}
+              </td>
+              <td>
+                {{ $r->developer?->name ?? $r->nama_developer ?? '-' }}
+                <br>
+                <span style="font-size:11px;color:#6b7280;">
+                  {{ $r->developer?->email ?? '-' }}
+                </span>
+              </td>
+              <td>{{ $r->lokasi ?? '-' }}</td>
+              <td>
+                <span class="badge {{ $badgeClass }}">{{ $label }}</span>
+              </td>
+              <td>{{ $r->approved_at?->format('d M Y H:i') ?? '-' }}</td>
+              <td>
+                <a href="{{ route('dinas.perumahan.verify.show', $r->id) }}" class="btn-plain">
+                  Detail
+                </a>
+              </td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  @endif
+</section>
 
 @endsection

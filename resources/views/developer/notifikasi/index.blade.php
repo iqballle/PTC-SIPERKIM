@@ -133,7 +133,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Perumahan</th>
                 <th>Status</th>
                 <th>Catatan Dinas</th>
@@ -188,7 +188,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Perumahan</th>
                 <th>Status</th>
                 <th>Catatan Dinas</th>
@@ -250,7 +250,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Perumahan</th>
                 <th>Status</th>
                 <th>Diproses</th>
@@ -298,7 +298,7 @@
           <table class="table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Perumahan</th>
                 <th>Diproses</th>
                 <th>Aksi</th>

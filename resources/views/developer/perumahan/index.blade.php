@@ -53,7 +53,7 @@
         </li>
     
         <li class="{{ request()->routeIs('developer.rth.*') ? 'active' : '' }}">
-          <a href="{{ route('developer.rth.index') }}">RTH - Penyiraman Otomatis</a>
+        <a href="{{ route('developer.rth.index') }}">RTH - Penyiraman Otomatis</a>
         </li>
         
         <li class="{{ request()->routeIs('developer.settings.*') ? 'active' : '' }}">
